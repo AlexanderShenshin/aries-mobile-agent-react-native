@@ -315,9 +315,18 @@ exports[`displays a PIN create screen PIN create renders correctly 1`] = `
               >
                 <View
                   accessibilityLabel="PINCreate.Show"
+                  accessibilityRole="button"
                   accessible={true}
                   collapsable={false}
                   focusable={true}
+                  hitSlop={
+                    Object {
+                      "bottom": 44,
+                      "left": 44,
+                      "right": 44,
+                      "top": 44,
+                    }
+                  }
                   nativeID="animatedComponent"
                   onClick={[Function]}
                   onResponderGrant={[Function]}
@@ -369,6 +378,7 @@ exports[`displays a PIN create screen PIN create renders correctly 1`] = `
             >
               <View
                 accessibilityLabel="PINEnter.Unlock"
+                accessibilityRole="button"
                 accessibilityState={
                   Object {
                     "disabled": false,
