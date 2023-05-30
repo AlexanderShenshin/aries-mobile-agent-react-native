@@ -6,6 +6,10 @@ import Collapsible from 'react-native-collapsible'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
+import CredentialDeclined from '../../assets/img/credential-declined.svg'
+import CustomNotificationDecline from '../../assets/img/delete-notification.svg'
+import ProofDeclined from '../../assets/img/proof-declined.svg'
+import { hitSlop } from '../../constants'
 import { useTheme } from '../../contexts/theme'
 import { GenericFn } from '../../types/fn'
 import { ModalUsage } from '../../types/remove'
@@ -88,6 +92,11 @@ const CommonRemoveModal: React.FC<CommonRemoveModalProps> = ({ usage, visible, o
   const { t } = useTranslation()
   const { ColorPallet, TextTheme } = useTheme()
 
+  const imageDisplayOptions = {
+    height: 115,
+    width: 115,
+  }
+
   const styles = StyleSheet.create({
     container: {
       height: '100%',
@@ -97,7 +106,7 @@ const CommonRemoveModal: React.FC<CommonRemoveModalProps> = ({ usage, visible, o
     controlsContainer: {
       marginTop: 'auto',
       marginHorizontal: 20,
-      marginBottom: Platform.OS === 'ios' ? 108 : 20,
+      marginBottom: Platform.OS === 'ios' ? 108 : 80,
     },
     headerView: {
       alignItems: 'flex-end',
@@ -113,6 +122,11 @@ const CommonRemoveModal: React.FC<CommonRemoveModalProps> = ({ usage, visible, o
       fontSize: 18,
       fontWeight: '400',
     },
+    declineBodyText: {
+      ...TextTheme.modalNormal,
+      fontSize: 24,
+      marginTop: 25,
+    },
   })
 
   const titleForConfirmButton = (): string => {
@@ -124,7 +138,7 @@ const CommonRemoveModal: React.FC<CommonRemoveModalProps> = ({ usage, visible, o
       return t('CredentialDetails.RemoveFromWallet')
     }
 
-    return t('Global.Remove')
+    return t('Global.Decline')
   }
 
   const titleForAccessibilityLabel = (): string => {
@@ -136,10 +150,77 @@ const CommonRemoveModal: React.FC<CommonRemoveModalProps> = ({ usage, visible, o
       return t('CredentialDetails.RemoveCredential')
     }
 
-    return t('Global.Remove')
+    return t('Global.Decline')
+  }
+
+  const testIdForConformationButton = (): string => {
+    if (usage === ModalUsage.ContactRemove || usage === ModalUsage.CredentialRemove) {
+      return testIdWithKey('ConfirmRemoveButton')
+    }
+
+    if (usage === ModalUsage.CredentialOfferDecline || usage === ModalUsage.ProofRequestDecline) {
+      return testIdWithKey('ConfirmDeclineButton')
+    }
+
+    return testIdWithKey('ConfirmButton')
+  }
+
+  const testIdForCancelButton = (): string => {
+    if (usage === ModalUsage.ContactRemove || usage === ModalUsage.CredentialRemove) {
+      return testIdWithKey('CancelRemoveButton')
+    }
+
+    if (usage === ModalUsage.CredentialOfferDecline || usage === ModalUsage.ProofRequestDecline) {
+      return testIdWithKey('CancelDeclineButton')
+    }
+
+    return testIdWithKey('CancelButton')
+  }
+
+  const headerImageForType = (usageType: ModalUsage) => {
+    return (
+      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+        {usageType === ModalUsage.CredentialOfferDecline && <ProofDeclined {...imageDisplayOptions} />}
+        {usageType === ModalUsage.ProofRequestDecline && <CredentialDeclined {...imageDisplayOptions} />}
+        {usageType === ModalUsage.CustomNotificationDecline && (
+          <CustomNotificationDecline style={{ marginBottom: 15 }} {...imageDisplayOptions} />
+        )}
+      </View>
+    )
   }
 
   const contentForType = (type: ModalUsage) => {
+    if (type === ModalUsage.CredentialOfferDecline) {
+      return (
+        <View style={[{ marginBottom: 25 }]}>
+          <Text style={[TextTheme.modalTitle, { fontSize: 28 }]}>{t('CredentialOffer.DeclineTitle')}</Text>
+          <Text style={[styles.declineBodyText, { marginTop: 30 }]}>{t('CredentialOffer.DeclineParagraph1')}</Text>
+          <Text style={[styles.declineBodyText]}>{t('CredentialOffer.DeclineParagraph2')}</Text>
+        </View>
+      )
+    }
+
+    if (type === ModalUsage.ProofRequestDecline) {
+      return (
+        <View style={[{ marginBottom: 25 }]}>
+          <Text style={[TextTheme.modalTitle, { fontSize: 28 }]}>{t('ProofRequest.DeclineTitle')}</Text>
+          <Text style={[styles.declineBodyText, { marginTop: 30 }]}>{t('ProofRequest.DeclineBulletPoint1')}</Text>
+          <Text style={[styles.declineBodyText]}>{t('ProofRequest.DeclineBulletPoint2')}</Text>
+          <Text style={[styles.declineBodyText]}>{t('ProofRequest.DeclineBulletPoint3')}</Text>
+        </View>
+      )
+    }
+
+    if (type === ModalUsage.CustomNotificationDecline) {
+      return (
+        <View style={[{ marginBottom: 25 }]}>
+          <Text style={[TextTheme.modalTitle, { fontSize: 28 }]}>{t('CredentialOffer.CustomOfferTitle')}</Text>
+          <Text style={[styles.declineBodyText, { marginTop: 30 }]}>{t('CredentialOffer.CustomOfferParagraph1')}</Text>
+          <Text style={[styles.declineBodyText]}>{t('CredentialOffer.CustomOfferParagraph2')}</Text>
+        </View>
+      )
+    }
+
     if (type === ModalUsage.CredentialRemove) {
       return (
         <View>
@@ -189,7 +270,13 @@ const CommonRemoveModal: React.FC<CommonRemoveModalProps> = ({ usage, visible, o
   return (
     <Modal transparent={true} visible={visible} animationType="slide">
       <View style={[styles.headerView]}>
-        <TouchableOpacity accessibilityLabel="Close" testID="Close" onPress={() => onCancel && onCancel()}>
+        <TouchableOpacity
+          accessibilityLabel={t('Global.Close')}
+          accessibilityRole={'button'}
+          testID={testIdWithKey('Close')}
+          onPress={() => onCancel && onCancel()}
+          hitSlop={hitSlop}
+        >
           <Icon name={'close'} size={42} color={TextTheme.modalNormal.color} />
         </TouchableOpacity>
       </View>
@@ -201,14 +288,17 @@ const CommonRemoveModal: React.FC<CommonRemoveModalProps> = ({ usage, visible, o
           },
         ]}
       >
-        <ScrollView style={[styles.container]}>{contentForType(usage)}</ScrollView>
+        <ScrollView style={[styles.container]}>
+          {headerImageForType(usage)}
+          {contentForType(usage)}
+        </ScrollView>
         <View style={[styles.controlsContainer]}>
           <View style={[{ paddingTop: 10 }]}>
             <Button
               title={titleForConfirmButton()}
               accessibilityLabel={titleForAccessibilityLabel()}
-              testID={testIdWithKey('ConfirmRemoveButton')}
-              onPress={() => onSubmit && onSubmit()}
+              testID={testIdForConformationButton()}
+              onPress={onSubmit}
               buttonType={ButtonType.ModalCritical}
             />
           </View>
@@ -216,8 +306,8 @@ const CommonRemoveModal: React.FC<CommonRemoveModalProps> = ({ usage, visible, o
             <Button
               title={t('Global.Cancel')}
               accessibilityLabel={t('Global.Cancel')}
-              testID={testIdWithKey('CancelRemoveButton')}
-              onPress={() => onCancel && onCancel()}
+              testID={testIdForCancelButton()}
+              onPress={onCancel}
               buttonType={ButtonType.ModalSecondary}
             />
           </View>

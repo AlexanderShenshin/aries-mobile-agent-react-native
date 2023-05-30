@@ -1,6 +1,6 @@
 import type { CredentialExchangeRecord, ProofExchangeRecord } from '@aries-framework/core'
 
-import { V1RequestPresentationMessage } from '@aries-framework/core'
+import { V1RequestPresentationMessage } from '@aries-framework/anoncreds'
 import { useAgent } from '@aries-framework/react-hooks'
 import { useNavigation } from '@react-navigation/core'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 import { StyleSheet, View, ViewStyle, Text, TextStyle, DeviceEventEmitter, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import { EventTypes } from '../../constants'
+import { EventTypes, hitSlop } from '../../constants'
 import { useConfiguration } from '../../contexts/configuration'
 import { useStore } from '../../contexts/store'
 import { useTheme } from '../../contexts/theme'
@@ -21,7 +21,7 @@ import { parsedSchema } from '../../utils/helpers'
 import { testIdWithKey } from '../../utils/testable'
 import Button, { ButtonType } from '../buttons/Button'
 import { InfoBoxType } from '../misc/InfoBox'
-import CommonDeclineModal from '../modals/CommonDeclineModal'
+import CommonRemoveModal from '../modals/CommonRemoveModal'
 
 const iconSize = 30
 
@@ -158,7 +158,7 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificatio
     toggleDeclineModalVisible()
   }
 
-  const commonDeclineModal = () => {
+  const commonRemoveModal = () => {
     let usage: ModalUsage | undefined
     let onSubmit: GenericFn | undefined
 
@@ -176,7 +176,7 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificatio
     }
 
     return usage !== undefined && onSubmit !== undefined ? (
-      <CommonDeclineModal
+      <CommonRemoveModal
         usage={usage}
         visible={declineModalVisible}
         onSubmit={onSubmit}
@@ -364,9 +364,11 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificatio
         ) && (
           <View>
             <TouchableOpacity
-              accessibilityLabel={t('Global.Close')}
-              testID={testIdWithKey(`Close${notificationType}`)}
+              accessibilityLabel={t('Global.Dismiss')}
+              accessibilityRole={'button'}
+              testID={testIdWithKey(`Dismiss${notificationType}`)}
               onPress={onClose}
+              hitSlop={hitSlop}
             >
               <Icon name={'close'} size={iconSize} color={styleConfig.iconColor} />
             </TouchableOpacity>
@@ -385,7 +387,7 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificatio
           onPress={onPress}
         />
       </View>
-      {commonDeclineModal()}
+      {commonRemoveModal()}
     </View>
   )
 }

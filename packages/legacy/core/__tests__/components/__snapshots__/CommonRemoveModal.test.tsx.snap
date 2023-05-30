@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CommonRemoveModal Component Remove contact renders correctly 1`] = `
+exports[`CommonRemoveModal Component Credential offer decline renders correctly 1`] = `
 <Modal
   animationType="slide"
   hardwareAccelerated={false}
@@ -24,10 +24,19 @@ exports[`CommonRemoveModal Component Remove contact renders correctly 1`] = `
     }
   >
     <View
-      accessibilityLabel="Close"
+      accessibilityLabel="Global.Close"
+      accessibilityRole="button"
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 44,
+          "left": 44,
+          "right": 44,
+          "top": 44,
+        }
+      }
       nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -41,7 +50,7 @@ exports[`CommonRemoveModal Component Remove contact renders correctly 1`] = `
           "opacity": 1,
         }
       }
-      testID="Close"
+      testID="com.ariesbifold:id/Close"
     >
       <Text
         allowFontScaling={false}
@@ -93,6 +102,996 @@ exports[`CommonRemoveModal Component Remove contact renders correctly 1`] = `
       }
     >
       <View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "center",
+            }
+          }
+        >
+          <
+            height={115}
+            width={115}
+          />
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "marginBottom": 25,
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontSize": 24,
+                  "fontWeight": "bold",
+                },
+                Object {
+                  "fontSize": 28,
+                },
+              ]
+            }
+          >
+            CredentialOffer.DeclineTitle
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontSize": 24,
+                  "fontWeight": "normal",
+                  "marginTop": 25,
+                },
+                Object {
+                  "marginTop": 30,
+                },
+              ]
+            }
+          >
+            CredentialOffer.DeclineParagraph1
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontSize": 24,
+                  "fontWeight": "normal",
+                  "marginTop": 25,
+                },
+              ]
+            }
+          >
+            CredentialOffer.DeclineParagraph2
+          </Text>
+        </View>
+      </View>
+    </RCTScrollView>
+    <View
+      style={
+        Array [
+          Object {
+            "marginBottom": 108,
+            "marginHorizontal": 20,
+            "marginTop": "auto",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "paddingTop": 10,
+            },
+          ]
+        }
+      >
+        <View
+          accessibilityLabel="Global.Decline"
+          accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={false}
+          nativeID="animatedComponent"
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#42803E",
+              "borderRadius": 4,
+              "opacity": 1,
+              "padding": 16,
+            }
+          }
+          testID="com.ariesbifold:id/ConfirmDeclineButton"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#FFFFFF",
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "textAlign": "center",
+                  },
+                  false,
+                ]
+              }
+            >
+              Global.Decline
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "paddingTop": 10,
+            },
+          ]
+        }
+      >
+        <View
+          accessibilityLabel="Global.Cancel"
+          accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={false}
+          nativeID="animatedComponent"
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "borderColor": "#42803E",
+              "borderRadius": 4,
+              "borderWidth": 2,
+              "opacity": 1,
+              "padding": 16,
+            }
+          }
+          testID="com.ariesbifold:id/CancelDeclineButton"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#42803E",
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "textAlign": "center",
+                  },
+                  false,
+                ]
+              }
+            >
+              Global.Cancel
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RNCSafeAreaView>
+</Modal>
+`;
+
+exports[`CommonRemoveModal Component Custom notification decline renders correctly 1`] = `
+<Modal
+  animationType="slide"
+  hardwareAccelerated={false}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "flex-end",
+          "backgroundColor": "#000000",
+          "borderTopLeftRadius": 10,
+          "borderTopRightRadius": 10,
+          "height": 55,
+          "marginTop": 65,
+          "paddingRight": 20,
+          "paddingTop": 10,
+        },
+      ]
+    }
+  >
+    <View
+      accessibilityLabel="Global.Close"
+      accessibilityRole="button"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 44,
+          "left": 44,
+          "right": 44,
+          "top": 44,
+        }
+      }
+      nativeID="animatedComponent"
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID="com.ariesbifold:id/Close"
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": "#FFFFFF",
+              "fontSize": 42,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+  <RNCSafeAreaView
+    edges={
+      Array [
+        "left",
+        "right",
+        "bottom",
+      ]
+    }
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#000000",
+        },
+      ]
+    }
+  >
+    <RCTScrollView
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#000000",
+            "height": "100%",
+            "padding": 20,
+          },
+        ]
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "center",
+            }
+          }
+        >
+          <
+            height={115}
+            style={
+              Object {
+                "marginBottom": 15,
+              }
+            }
+            width={115}
+          />
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "marginBottom": 25,
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontSize": 24,
+                  "fontWeight": "bold",
+                },
+                Object {
+                  "fontSize": 28,
+                },
+              ]
+            }
+          >
+            CredentialOffer.CustomOfferTitle
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontSize": 24,
+                  "fontWeight": "normal",
+                  "marginTop": 25,
+                },
+                Object {
+                  "marginTop": 30,
+                },
+              ]
+            }
+          >
+            CredentialOffer.CustomOfferParagraph1
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontSize": 24,
+                  "fontWeight": "normal",
+                  "marginTop": 25,
+                },
+              ]
+            }
+          >
+            CredentialOffer.CustomOfferParagraph2
+          </Text>
+        </View>
+      </View>
+    </RCTScrollView>
+    <View
+      style={
+        Array [
+          Object {
+            "marginBottom": 108,
+            "marginHorizontal": 20,
+            "marginTop": "auto",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "paddingTop": 10,
+            },
+          ]
+        }
+      >
+        <View
+          accessibilityLabel="Global.Decline"
+          accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={false}
+          nativeID="animatedComponent"
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#42803E",
+              "borderRadius": 4,
+              "opacity": 1,
+              "padding": 16,
+            }
+          }
+          testID="com.ariesbifold:id/ConfirmButton"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#FFFFFF",
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "textAlign": "center",
+                  },
+                  false,
+                ]
+              }
+            >
+              Global.Decline
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "paddingTop": 10,
+            },
+          ]
+        }
+      >
+        <View
+          accessibilityLabel="Global.Cancel"
+          accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={false}
+          nativeID="animatedComponent"
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "borderColor": "#42803E",
+              "borderRadius": 4,
+              "borderWidth": 2,
+              "opacity": 1,
+              "padding": 16,
+            }
+          }
+          testID="com.ariesbifold:id/CancelButton"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#42803E",
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "textAlign": "center",
+                  },
+                  false,
+                ]
+              }
+            >
+              Global.Cancel
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RNCSafeAreaView>
+</Modal>
+`;
+
+exports[`CommonRemoveModal Component Proof request decline renders correctly 1`] = `
+<Modal
+  animationType="slide"
+  hardwareAccelerated={false}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "flex-end",
+          "backgroundColor": "#000000",
+          "borderTopLeftRadius": 10,
+          "borderTopRightRadius": 10,
+          "height": 55,
+          "marginTop": 65,
+          "paddingRight": 20,
+          "paddingTop": 10,
+        },
+      ]
+    }
+  >
+    <View
+      accessibilityLabel="Global.Close"
+      accessibilityRole="button"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 44,
+          "left": 44,
+          "right": 44,
+          "top": 44,
+        }
+      }
+      nativeID="animatedComponent"
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID="com.ariesbifold:id/Close"
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": "#FFFFFF",
+              "fontSize": 42,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+  <RNCSafeAreaView
+    edges={
+      Array [
+        "left",
+        "right",
+        "bottom",
+      ]
+    }
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#000000",
+        },
+      ]
+    }
+  >
+    <RCTScrollView
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#000000",
+            "height": "100%",
+            "padding": 20,
+          },
+        ]
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "center",
+            }
+          }
+        >
+          <
+            height={115}
+            width={115}
+          />
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "marginBottom": 25,
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontSize": 24,
+                  "fontWeight": "bold",
+                },
+                Object {
+                  "fontSize": 28,
+                },
+              ]
+            }
+          >
+            ProofRequest.DeclineTitle
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontSize": 24,
+                  "fontWeight": "normal",
+                  "marginTop": 25,
+                },
+                Object {
+                  "marginTop": 30,
+                },
+              ]
+            }
+          >
+            ProofRequest.DeclineBulletPoint1
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontSize": 24,
+                  "fontWeight": "normal",
+                  "marginTop": 25,
+                },
+              ]
+            }
+          >
+            ProofRequest.DeclineBulletPoint2
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#FFFFFF",
+                  "fontSize": 24,
+                  "fontWeight": "normal",
+                  "marginTop": 25,
+                },
+              ]
+            }
+          >
+            ProofRequest.DeclineBulletPoint3
+          </Text>
+        </View>
+      </View>
+    </RCTScrollView>
+    <View
+      style={
+        Array [
+          Object {
+            "marginBottom": 108,
+            "marginHorizontal": 20,
+            "marginTop": "auto",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "paddingTop": 10,
+            },
+          ]
+        }
+      >
+        <View
+          accessibilityLabel="Global.Decline"
+          accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={false}
+          nativeID="animatedComponent"
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#42803E",
+              "borderRadius": 4,
+              "opacity": 1,
+              "padding": 16,
+            }
+          }
+          testID="com.ariesbifold:id/ConfirmDeclineButton"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#FFFFFF",
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "textAlign": "center",
+                  },
+                  false,
+                ]
+              }
+            >
+              Global.Decline
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "paddingTop": 10,
+            },
+          ]
+        }
+      >
+        <View
+          accessibilityLabel="Global.Cancel"
+          accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={false}
+          nativeID="animatedComponent"
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "borderColor": "#42803E",
+              "borderRadius": 4,
+              "borderWidth": 2,
+              "opacity": 1,
+              "padding": 16,
+            }
+          }
+          testID="com.ariesbifold:id/CancelDeclineButton"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#42803E",
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "textAlign": "center",
+                  },
+                  false,
+                ]
+              }
+            >
+              Global.Cancel
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RNCSafeAreaView>
+</Modal>
+`;
+
+exports[`CommonRemoveModal Component Remove contact renders correctly 1`] = `
+<Modal
+  animationType="slide"
+  hardwareAccelerated={false}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "flex-end",
+          "backgroundColor": "#000000",
+          "borderTopLeftRadius": 10,
+          "borderTopRightRadius": 10,
+          "height": 55,
+          "marginTop": 65,
+          "paddingRight": 20,
+          "paddingTop": 10,
+        },
+      ]
+    }
+  >
+    <View
+      accessibilityLabel="Global.Close"
+      accessibilityRole="button"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 44,
+          "left": 44,
+          "right": 44,
+          "top": 44,
+        }
+      }
+      nativeID="animatedComponent"
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID="com.ariesbifold:id/Close"
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": "#FFFFFF",
+              "fontSize": 42,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+  <RNCSafeAreaView
+    edges={
+      Array [
+        "left",
+        "right",
+        "bottom",
+      ]
+    }
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#000000",
+        },
+      ]
+    }
+  >
+    <RCTScrollView
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#000000",
+            "height": "100%",
+            "padding": 20,
+          },
+        ]
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "center",
+            }
+          }
+        />
         <View>
           <View
             style={
@@ -387,6 +1386,7 @@ exports[`CommonRemoveModal Component Remove contact renders correctly 1`] = `
       >
         <View
           accessibilityLabel="ContactDetails.RemoveContact"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "disabled": false,
@@ -394,7 +1394,7 @@ exports[`CommonRemoveModal Component Remove contact renders correctly 1`] = `
           }
           accessible={true}
           collapsable={false}
-          focusable={true}
+          focusable={false}
           nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -451,6 +1451,7 @@ exports[`CommonRemoveModal Component Remove contact renders correctly 1`] = `
       >
         <View
           accessibilityLabel="Global.Cancel"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "disabled": false,
@@ -458,7 +1459,7 @@ exports[`CommonRemoveModal Component Remove contact renders correctly 1`] = `
           }
           accessible={true}
           collapsable={false}
-          focusable={true}
+          focusable={false}
           nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -534,10 +1535,19 @@ exports[`CommonRemoveModal Component Remove credential renders correctly 1`] = `
     }
   >
     <View
-      accessibilityLabel="Close"
+      accessibilityLabel="Global.Close"
+      accessibilityRole="button"
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 44,
+          "left": 44,
+          "right": 44,
+          "top": 44,
+        }
+      }
       nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -551,7 +1561,7 @@ exports[`CommonRemoveModal Component Remove credential renders correctly 1`] = `
           "opacity": 1,
         }
       }
-      testID="Close"
+      testID="com.ariesbifold:id/Close"
     >
       <Text
         allowFontScaling={false}
@@ -603,6 +1613,14 @@ exports[`CommonRemoveModal Component Remove credential renders correctly 1`] = `
       }
     >
       <View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "center",
+            }
+          }
+        />
         <View>
           <View
             style={
@@ -1005,6 +2023,7 @@ exports[`CommonRemoveModal Component Remove credential renders correctly 1`] = `
       >
         <View
           accessibilityLabel="CredentialDetails.RemoveCredential"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "disabled": false,
@@ -1012,7 +2031,7 @@ exports[`CommonRemoveModal Component Remove credential renders correctly 1`] = `
           }
           accessible={true}
           collapsable={false}
-          focusable={true}
+          focusable={false}
           nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -1069,6 +2088,7 @@ exports[`CommonRemoveModal Component Remove credential renders correctly 1`] = `
       >
         <View
           accessibilityLabel="Global.Cancel"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "disabled": false,
@@ -1076,7 +2096,7 @@ exports[`CommonRemoveModal Component Remove credential renders correctly 1`] = `
           }
           accessible={true}
           collapsable={false}
-          focusable={true}
+          focusable={false}
           nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -1152,10 +2172,19 @@ exports[`CommonRemoveModal Component Rerenders correctly when not visible 1`] = 
     }
   >
     <View
-      accessibilityLabel="Close"
+      accessibilityLabel="Global.Close"
+      accessibilityRole="button"
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 44,
+          "left": 44,
+          "right": 44,
+          "top": 44,
+        }
+      }
       nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -1169,7 +2198,7 @@ exports[`CommonRemoveModal Component Rerenders correctly when not visible 1`] = 
           "opacity": 1,
         }
       }
-      testID="Close"
+      testID="com.ariesbifold:id/Close"
     >
       <Text
         allowFontScaling={false}
@@ -1221,6 +2250,14 @@ exports[`CommonRemoveModal Component Rerenders correctly when not visible 1`] = 
       }
     >
       <View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "center",
+            }
+          }
+        />
         <View>
           <View
             style={
@@ -1515,6 +2552,7 @@ exports[`CommonRemoveModal Component Rerenders correctly when not visible 1`] = 
       >
         <View
           accessibilityLabel="ContactDetails.RemoveContact"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "disabled": false,
@@ -1522,7 +2560,7 @@ exports[`CommonRemoveModal Component Rerenders correctly when not visible 1`] = 
           }
           accessible={true}
           collapsable={false}
-          focusable={true}
+          focusable={false}
           nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -1579,6 +2617,7 @@ exports[`CommonRemoveModal Component Rerenders correctly when not visible 1`] = 
       >
         <View
           accessibilityLabel="Global.Cancel"
+          accessibilityRole="button"
           accessibilityState={
             Object {
               "disabled": false,
@@ -1586,7 +2625,7 @@ exports[`CommonRemoveModal Component Rerenders correctly when not visible 1`] = 
           }
           accessible={true}
           collapsable={false}
-          focusable={true}
+          focusable={false}
           nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
