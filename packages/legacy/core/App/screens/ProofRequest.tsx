@@ -1,21 +1,16 @@
 import type { StackScreenProps } from '@react-navigation/stack'
 
 import {
-  IndyProofFormat,
-  IndyRetrievedCredentialsFormat,
-  ProofExchangeRecord,
-  RequestedAttribute,
-  RequestedPredicate,
-} from '@aries-framework/core'
-import {
-  FormatRetrievedCredentialOptions,
-  GetFormatDataReturn,
-} from '@aries-framework/core/build/modules/proofs/models/ProofServiceOptions'
-import { useAgent, useConnectionById, useProofById, useCredentials } from '@aries-framework/react-hooks'
+  AnonCredsCredentialsForProofRequest,
+  AnonCredsRequestedAttributeMatch,
+  AnonCredsRequestedPredicateMatch,
+} from '@aries-framework/anoncreds'
+import { ProofExchangeRecord } from '@aries-framework/core'
+import { useConnectionById, useCredentials, useProofById } from '@aries-framework/react-hooks'
 import startCase from 'lodash.startcase'
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { View, StyleSheet, Text, DeviceEventEmitter, FlatList } from 'react-native'
+import { DeviceEventEmitter, FlatList, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
@@ -31,6 +26,7 @@ import { useTheme } from '../contexts/theme'
 import { BifoldError } from '../types/error'
 import { NotificationStackParams, Screens } from '../types/navigators'
 import { ProofCredentialItems } from '../types/record'
+import { useAppAgent } from '../utils/agent'
 import { ModalUsage } from '../types/remove'
 import { parseCredDefFromId } from '../utils/cred-def'
 import { mergeAttributesAndPredicates, processProofAttributes, processProofPredicates } from '../utils/helpers'
@@ -39,7 +35,7 @@ import { testIdWithKey } from '../utils/testable'
 import ProofRequestAccept from './ProofRequestAccept'
 
 type ProofRequestProps = StackScreenProps<NotificationStackParams, Screens.ProofRequest>
-type Fields = Record<string, RequestedAttribute[] | RequestedPredicate[]>
+type Fields = Record<string, AnonCredsRequestedAttributeMatch[] | AnonCredsRequestedPredicateMatch[]>
 
 const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
   if (!route?.params) {
@@ -47,7 +43,7 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
   }
 
   const { proofId } = route?.params
-  const { agent } = useAgent()
+  const { agent } = useAppAgent()
   const { t } = useTranslation()
   const { assertConnectedNetwork } = useNetwork()
   const fullCredentials = useCredentials().records
@@ -56,7 +52,7 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
     ? useConnectionById(proof.connectionId)?.theirLabel
     : proof?.connectionId ?? ''
   const [pendingModalVisible, setPendingModalVisible] = useState(false)
-  const [retrievedCredentials, setRetrievedCredentials] = useState<IndyRetrievedCredentialsFormat>()
+  const [retrievedCredentials, setRetrievedCredentials] = useState<AnonCredsCredentialsForProofRequest>()
   const [proofItems, setProofItems] = useState<ProofCredentialItems[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [declineModalVisible, setDeclineModalVisible] = useState(false)
@@ -136,25 +132,39 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
 
     setLoading(true)
 
-    const retrieveCredentialsForProof = async (
-      proof: ProofExchangeRecord
-    ): Promise<
-      | {
-          format: GetFormatDataReturn<[IndyProofFormat]>
-          credentials: FormatRetrievedCredentialOptions<[IndyProofFormat]>
-        }
-      | undefined
-    > => {
+    const retrieveCredentialsForProof = async (proof: ProofExchangeRecord) => {
       try {
         const format = await agent.proofs.getFormatData(proof.id)
-        const credentials = await agent.proofs.getRequestedCredentialsForProofRequest({
+        const hasAnonCreds = format.request?.anoncreds !== undefined
+        const hasIndy = format.request?.indy !== undefined
+        const credentials = await agent.proofs.getCredentialsForRequest({
           proofRecordId: proof.id,
-          config: {
-            // Setting `filterByNonRevocationRequirements` to `false` returns all
-            // credentials even if they are revokable (and revoked). We need this to
-            // be able to show why a proof cannot be satisfied. Otherwise we can only
-            // show failure.
-            filterByNonRevocationRequirements: false,
+          proofFormats: {
+            // FIXME: AFJ will try to use the format, even if the value is undefined (but the key is present)
+            // We should ignore the key, if the value is undefined. For now this is a workaround.
+            ...(hasIndy
+              ? {
+                  indy: {
+                    // Setting `filterByNonRevocationRequirements` to `false` returns all
+                    // credentials even if they are revokable (and revoked). We need this to
+                    // be able to show why a proof cannot be satisfied. Otherwise we can only
+                    // show failure.
+                    filterByNonRevocationRequirements: false,
+                  },
+                }
+              : {}),
+
+            ...(hasAnonCreds
+              ? {
+                  anoncreds: {
+                    // Setting `filterByNonRevocationRequirements` to `false` returns all
+                    // credentials even if they are revokable (and revoked). We need this to
+                    // be able to show why a proof cannot be satisfied. Otherwise we can only
+                    // show failure.
+                    filterByNonRevocationRequirements: false,
+                  },
+                }
+              : {}),
           },
         })
         if (!credentials) {
@@ -177,20 +187,18 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
         if (!(format && credentials && fullCredentials)) {
           return
         }
+
+        const proofFormat = credentials.proofFormats.anoncreds ?? credentials.proofFormats.indy
         const reqCredIds = [
-          ...Object.keys(credentials.proofFormats.indy?.requestedAttributes ?? {}).map(
-            (key) => credentials.proofFormats.indy?.requestedAttributes[key][0]?.credentialId
-          ),
-          ...Object.keys(credentials.proofFormats.indy?.requestedPredicates ?? {}).map(
-            (key) => credentials.proofFormats.indy?.requestedPredicates[key][0]?.credentialId
-          ),
+          ...Object.keys(proofFormat?.attributes ?? {}).map((key) => proofFormat?.attributes[key][0]?.credentialId),
+          ...Object.keys(proofFormat?.predicates ?? {}).map((key) => proofFormat?.predicates[key][0]?.credentialId),
         ]
         const credentialRecords = fullCredentials.filter((record) =>
           reqCredIds.includes(record.credentials[0]?.credentialRecordId)
         )
         const attributes = processProofAttributes(format.request, credentials, credentialRecords)
         const predicates = processProofPredicates(format.request, credentials, credentialRecords)
-        setRetrievedCredentials(credentials.proofFormats.indy)
+        setRetrievedCredentials(proofFormat)
 
         const groupedProof = Object.values(mergeAttributesAndPredicates(attributes, predicates))
         setProofItems(groupedProof)
@@ -206,8 +214,8 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
 
   const hasAvailableCredentials = (credName?: string): boolean => {
     const fields: Fields = {
-      ...retrievedCredentials?.requestedAttributes,
-      ...retrievedCredentials?.requestedPredicates,
+      ...retrievedCredentials?.attributes,
+      ...retrievedCredentials?.predicates,
     }
 
     if (credName) {
@@ -237,13 +245,16 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
       if (!retrievedCredentials) {
         throw new Error(t('ProofRequest.RequestedCredentialsCouldNotBeFound'))
       }
+      const format = await agent.proofs.getFormatData(proof.id)
+
+      const formatToUse = format.request?.anoncreds ? 'anoncreds' : 'indy'
 
       const automaticRequestedCreds =
         retrievedCredentials &&
-        (await agent.proofs.autoSelectCredentialsForProofRequest({
+        (await agent.proofs.selectCredentialsForRequest({
           proofRecordId: proof.id,
-          config: {
-            filterByPresentationPreview: true,
+          proofFormats: {
+            [formatToUse]: {},
           },
         }))
 
