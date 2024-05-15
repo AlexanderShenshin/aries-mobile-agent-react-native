@@ -21,6 +21,10 @@ export enum SCREEN_TOKENS {
   SCREEN_ONBOARDING = 'screen.onboarding',
   SCREEN_DEVELOPER = 'screen.developer',
   SCREEN_ONBOARDING_ITEM = 'screen.onboarding.item',
+  SCREEN_CREDENTIAL_LIST = 'screen.credential.list',
+  SCREEN_CREDENTIAL_DETAILS = 'screen.credential.details',
+  SCREEN_CREDENTIAL_OFFER = 'screen.credential.offer',
+  SCREEN_PROOF_REQUEST = 'screen.proof.request',
 }
 export enum STACK_TOKENS {
   STACK_ONBOARDING = 'stack.onboarding',
@@ -34,7 +38,7 @@ export enum COMP_TOKENS {
 }
 
 export enum SERVICE_TOKENS {
-  SERVICE_TERMS = 'screen.terms',
+  SERVICE_TERMS = 'service.terms',
 }
 
 export enum LOAD_STATE_TOKENS {
@@ -77,6 +81,10 @@ export interface TokenMapping {
   [TOKENS.SCREEN_TERMS]: { screen: React.FC; version: boolean | string }
   [TOKENS.SCREEN_DEVELOPER]: React.FC
   [TOKENS.SCREEN_ONBOARDING]: typeof Onboarding
+  [TOKENS.SCREEN_CREDENTIAL_LIST]: React.FC
+  [TOKENS.SCREEN_CREDENTIAL_DETAILS]: React.FC
+  [TOKENS.SCREEN_CREDENTIAL_OFFER]: React.FC
+  [TOKENS.SCREEN_PROOF_REQUEST]: React.FC
   [TOKENS.FN_ONBOARDING_DONE]: FN_ONBOARDING_DONE
   [TOKENS.LOAD_STATE]: FN_LOADSTATE
   [TOKENS.COMP_BUTTON]: Button

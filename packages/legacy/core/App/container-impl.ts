@@ -13,9 +13,13 @@ import { DispatchAction, ReducerAction } from './contexts/reducers/store'
 import { defaultState } from './contexts/store'
 import OnboardingStack from './navigators/OnboardingStack'
 import { DefaultScreenOptionsDictionary } from './navigators/defaultStackOptions'
+import CredentialDetails from './screens/CredentialDetails'
+import CredentialOffer from './screens/CredentialOffer'
 import Developer from './screens/Developer'
+import ListCredentials from './screens/ListCredentials'
 import Onboarding from './screens/Onboarding'
 import Preface from './screens/Preface'
+import ProofRequest from './screens/ProofRequest'
 import ScreenTerms, { TermsVersion } from './screens/Terms'
 import { loadLoginAttempt } from './services/keychain'
 import { ConsoleLogger } from './services/logger'
@@ -41,6 +45,10 @@ export class MainContainer implements Container {
     this.container.registerInstance(TOKENS.SCREEN_DEVELOPER, Developer)
     this.container.registerInstance(TOKENS.SCREEN_TERMS, { screen: ScreenTerms, version: TermsVersion })
     this.container.registerInstance(TOKENS.SCREEN_ONBOARDING, Onboarding)
+    this.container.registerInstance(TOKENS.SCREEN_CREDENTIAL_LIST, ListCredentials)
+    this.container.registerInstance(TOKENS.SCREEN_CREDENTIAL_DETAILS, CredentialDetails)
+    this.container.registerInstance(TOKENS.SCREEN_CREDENTIAL_OFFER, CredentialOffer)
+    this.container.registerInstance(TOKENS.SCREEN_PROOF_REQUEST, ProofRequest)
     this.container.registerInstance(TOKENS.STACK_ONBOARDING, OnboardingStack)
     this.container.registerInstance(TOKENS.COMP_BUTTON, Button)
     this.container.registerInstance(TOKENS.GROUP_BY_REFERENT, false)

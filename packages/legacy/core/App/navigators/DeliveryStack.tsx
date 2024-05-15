@@ -3,10 +3,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import HeaderRightHome from '../components/buttons/HeaderHome'
+import { TOKENS, useContainer } from '../container-api'
 import { useTheme } from '../contexts/theme'
 import Connection from '../screens/Connection'
-import CredentialOffer from '../screens/CredentialOffer'
-import ProofRequest from '../screens/ProofRequest'
 import { DeliveryStackParams, Screens } from '../types/navigators'
 
 import { createDefaultStackOptions } from './defaultStackOptions'
@@ -16,6 +15,10 @@ const DeliveryStack: React.FC = () => {
   const { t } = useTranslation()
   const theme = useTheme()
   const defaultStackOptions = createDefaultStackOptions(theme)
+
+  const container = useContainer()
+  const CredentialOffer = container.resolve(TOKENS.SCREEN_CREDENTIAL_OFFER)
+  const ProofRequest = container.resolve(TOKENS.SCREEN_PROOF_REQUEST)
 
   return (
     <Stack.Navigator
